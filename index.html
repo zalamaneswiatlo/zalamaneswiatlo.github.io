@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>załamane światło</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;1,400&family=Syne:wght@600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./gallery/gallery.css" />
+</head>
+<body style="margin:0">
+
+<div id="photo-gallery-embed">
+
+  <header class="site-header">
+    <div class="site-header__brand">
+      <h1>załamane światło</h1>
+      <p class="site-by">Michał Szcześniak</p>
+    </div>
+    <a class="site-header__blog" href="./blog/index.html">Przejdź do bloga</a>
+  </header>
+
+  <main class="wrap">
+    <ul class="mosaic" id="pg-mosaic" aria-label="Miniatury"></ul>
+  </main>
+
+
+  <div class="branch" id="pg-branch" hidden aria-labelledby="pg-branch-title">
+    <header class="branch__header">
+      <button type="button" class="branch__back" id="pg-branch-back" aria-label="Wróć do strony głównej">←</button>
+      <div class="branch__head">
+        <h1 class="branch__title" id="pg-branch-title"></h1>
+        <p class="branch__intro" id="pg-branch-intro"></p>
+      </div>
+    </header>
+    <ul class="branch__grid" id="pg-branch-grid" aria-label="Podserie"></ul>
+  </div>
+
+
+  <div class="lightbox" id="pg-lightbox" hidden aria-modal="true" role="dialog" aria-labelledby="pg-lb-title">
+    <div class="lightbox__inner">
+      <div class="lightbox__stage">
+        <div class="lightbox__stage-main">
+          <button type="button" class="lightbox__nav lightbox__nav--prev" id="pg-lb-prev" aria-label="Poprzednie">‹</button>
+          <figure class="lightbox__figure">
+            <img id="pg-lb-img" src="" alt="" />
+          </figure>
+          <button type="button" class="lightbox__nav lightbox__nav--next" id="pg-lb-next" aria-label="Następne">›</button>
+        </div>
+
+        <div class="lightbox__filmstrip" id="pg-lb-filmstrip" role="tablist" aria-label="Miniatury w galerii" hidden></div>
+      </div>
+      <div class="lightbox__doc">
+        <aside class="lightbox__copy">
+          <h2 class="lightbox__title" id="pg-lb-title"></h2>
+          <p class="lightbox__curator" id="pg-lb-curator" hidden></p>
+          <p class="lightbox__text" id="pg-lb-text"></p>
+        </aside>
+        <button type="button" class="lightbox__close" id="pg-lb-close" aria-label="Zamknij">×</button>
+      </div>
+    </div>
+  </div>
+
+<script src="./gallery/gallery-data.js" defer></script>
+<script src="./gallery/gallery.js" defer></script>
+</div>
+</body>
+</html>

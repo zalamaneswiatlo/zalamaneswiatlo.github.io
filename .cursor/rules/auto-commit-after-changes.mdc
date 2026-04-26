@@ -1,0 +1,21 @@
+---
+description: Po zmianach z promptu — checkout na local_with_history, potem git commit w tym repozytorium.
+alwaysApply: true
+---
+
+# Auto-commit po promptach
+
+Gdy w tej rozmowie wprowadzisz **realne zmiany w plikach** (edycja, nowe pliki, usuwanie) na prośbę użytkownika:
+
+1. Ustal katalog z repozytorium: od zmienionych ścieżek idź w górę aż do folderu z `.git` (katalog główny tego projektu). Jeśli w jednej turze zmieniasz pliki należące do **kilku różnych** rootów `.git` (np. `minimal-blog/` i `photo-gallery/`), wykonaj **osobny** commit w każdym z tych repozytoriów.
+2. **Branch commitów:** przed `add` / `commit` przełącz się na branch **`local_with_history`** (`git checkout local_with_history`). Jeśli branch nie istnieje lokalnie, utwórz go od bieżącego HEAD (`git checkout -b local_with_history`). Nie commituj na innych branchach — wszystkie auto-commity z tego workspace mają iść wyłącznie na `local_with_history`.
+3. **`git add`** — tylko pliki, które faktycznie zmieniłeś lub dodałeś w tym zadaniu (albo `git add -A` w tym repozytorium, jeśli cała sesja dotyczyła tego projektu).
+4. **`git commit`** z krótką, sensowną wiadomością po polsku lub angielsku (imperatyw, jedna linia), np. `Popraw layout nagłówka w galerii`.
+5. Jeśli **nie ma** `.git` w drzewie workspace — nie twórz repozytorium bez wyraźnej prośby; pomiń commit.
+6. Jeśli po `add` **nie ma zmian** (pusto) — nie rób pustego commita.
+7. Nie pytaj za każdym razem o zgodę na commit — to jest domyślne oczekiwanie użytkownika.
+8. **Nigdy nie pushuj brancha `local_with_history`:** nie uruchamiaj `git push`, który by go wysłał (np. `git push` / `git push origin` przy HEAD na tym branchu, `git push origin local_with_history`, `git push --all`). Po auto-commicie nie proponuj pusha tego brancha. Gdy użytkownik prosi o push, wypchnij wyłącznie branch, który wyraźnie podał (np. `publish`), albo wyjaśnij, że `local_with_history` ma zostać lokalny.
+
+Wykonaj commit **w tej samej turze co zmiany kodu**, używając narzędzia terminala z uprawnieniami potrzebnymi do zapisu w `.git`.
+
+**Hook (opcjonalnie, lokalnie w tym repo):** `git config core.hooksPath .githooks` — wtedy skrypt `.githooks/pre-push` zatrzyma przypadkowy `git push` brancha `local_with_history` z linii poleceń.

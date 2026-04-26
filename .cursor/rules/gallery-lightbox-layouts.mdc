@@ -1,0 +1,39 @@
+---
+description: Galeria główna — dwa układy lightboxa (z tekstem / bez); ujednolicenie wpisów w danych.
+globs: gallery/**/*
+alwaysApply: false
+---
+
+# Galeria: dwa style lightboxa
+
+W `gallery/gallery-data.js` każdy wpis w `PG_COLLECTIONS` (oraz każdy obiekt w `items` gałęzi, jeśli otwiera lightbox) **musi** mieć pole boolean **`fullStageLightbox`**:
+
+| Wartość | Znaczenie | Wymagania treści |
+|--------|-----------|------------------|
+| **`false`** | Układ **z panelem tekstu** — obraz + kolumna z tytułem, opisem (`text`), opcjonalnie `curatorFooter`. | Używaj **tego samego wzorca** jak istniejące wpisy z tekstem: sensowny `text` (wieloakapitowy), przy długim wstępie **`curatorFooter`**: `"Wprowadzenie kuratora"`. |
+| **`true`** | Układ **bez panelu tekstu** — klasa `lightbox--full-stage` w `gallery.js` / `gallery.css`: pełna szerokość, **tylko tytuł** u góry, duży obszar na zdjęcie + filmstrip. | `text` zwykle **`""`** (pusty). **Nie** dodawaj `curatorFooter`. |
+
+## Zasady spójności
+
+- **Nowy wpis z opisem:** skopiuj konwencję z „Relacje…”, „Morana…”, „Prawdziwa historia…” — `fullStageLightbox: false`, `text` + ewentualnie `curatorFooter`.
+- **Nowy wpis tylko obrazy / tytuł:** jak „Morfologia multimodalna” (folder `morfologia/`) — `fullStageLightbox: true`, `text: ""`, bez `curatorFooter`.
+- Zmiany w CSS dla obu trybów rób **osobnymi** selektorami: bazowy lightbox vs. `#photo-gallery-embed .lightbox.lightbox--full-stage …`, żeby nie psuć trybu z tekstem.
+
+Powiązany kod: `gallery/gallery.js` (`openGallery` / `close`), `gallery/gallery.css` (`.lightbox--full-stage`).
+
+## Jak się odwoływać (żeby agent rozumiał od razu)
+
+Możesz używać **zamiennie** któregokolwiek z poniższych zestawów — w kodzie zawsze chodzi o to samo pole `fullStageLightbox`:
+
+| Styl w rozmowie | Inne nazwy | W kodzie |
+|-----------------|------------|----------|
+| **„lightbox z tekstem”** / **„układ z panelem”** / **„jak Relacje / Morana / Prawdziwa historia”** | `fullStageLightbox: false`, tryb **split** (obraz + kolumna) | `fullStageLightbox: false` |
+| **„lightbox bez tekstu”** / **„pełna scena”** / **„jak Morfologia multimodalna”** / **„tylko tytuł u góry”** | `fullStageLightbox: true`, klasa **`lightbox--full-stage`** | `fullStageLightbox: true` |
+
+**Krótkie polecenia po polsku:**  
+„Daj **pełną scenę**” / „**bez panelu tekstu**” / „**jak Morfologia multimodalna**” → `true`.  
+„Daj **panel z tekstem**” / „**z opisem z boku**” / „**jak Morana**” → `false`.
+
+**Po angielsku:** „**full-stage lightbox**” = `true`; „**split layout**” / „**with copy panel**” = `false`.
+
+W promptach możesz też napisać wprost: **`fullStageLightbox: true`** lub **`false`** — to najpewniejsze.

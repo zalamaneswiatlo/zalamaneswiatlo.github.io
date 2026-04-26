@@ -1,0 +1,611 @@
+:root {
+  --fg: #1a1a1a;
+  --muted: #666;
+  --line: #e8e8e8;
+  --post-divider: #9a9a9a;
+  --bg: #fafafa;
+  --max: 42rem;
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-text: "DM Sans", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  padding: 3rem 1.5rem 6rem;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+}
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.site-header {
+  margin-bottom: 3.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.site-brand {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+.site-header h1 {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 4vw, 1.65rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  text-transform: lowercase;
+}
+.site-by {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.site-gallery {
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  font-weight: 500;
+}
+article.post {
+  padding-bottom: 4rem;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--post-divider);
+}
+article.post:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.post header {
+  margin-bottom: 1.25rem;
+}
+.post h2 {
+  margin: 0 0 0.45rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 3.2vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.22;
+}
+.post time {
+  font-family: var(--font-text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.post-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.post-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  vertical-align: middle;
+  cursor: zoom-in;
+  background: #eee;
+}
+.post-media img.gallery-only {
+  display: none;
+}
+
+/* Wpisy „róż”, „błękit”, „turkus”, „porzucona”: zdjęcie na połowę szerokości kolumny */
+.post[data-post="rozowa-rura"] .post-media,
+.post[data-post="smuga-niebieski"] .post-media,
+.post[data-post="turkus"] .post-media,
+.post[data-post="porzucona"] .post-media {
+  align-items: center;
+}
+.post[data-post="rozowa-rura"] .post-media img,
+.post[data-post="smuga-niebieski"] .post-media img,
+.post[data-post="turkus"] .post-media img,
+.post[data-post="porzucona"] .post-media img {
+  width: 50%;
+  max-width: 50%;
+}
+
+/* Wpis „Działka”: makietowy układ 1 + 2 + 3, bez przycinania (pełne kadry) */
+.post-media.post-media--dzialka-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  align-items: stretch;
+}
+.post-media.post-media--dzialka-grid > img:first-child {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.post-media.post-media--dzialka-grid .dzialka-row {
+  display: grid;
+  gap: 0.55rem;
+  min-width: 0;
+  align-items: start;
+}
+.post-media.post-media--dzialka-grid .dzialka-row--2 {
+  grid-template-columns: 1fr 1fr;
+}
+.post-media.post-media--dzialka-grid .dzialka-row--2 img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+.post-media.post-media--dzialka-grid .dzialka-row--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.post-media.post-media--dzialka-grid .dzialka-row--3 img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* Siódma rano, Działka: miniatury ~80% szerokości, wyśrodkowane */
+.post[data-post="siodma-rano"] .post-media > img {
+  width: 80%;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post[data-post="dzialka"] .post-media--dzialka-grid > img:first-child {
+  width: 80%;
+  max-width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.post[data-post="dzialka"] .post-media--dzialka-grid .dzialka-row--2 img,
+.post[data-post="dzialka"] .post-media--dzialka-grid .dzialka-row--3 img {
+  width: 80%;
+  max-width: 80%;
+  justify-self: center;
+}
+
+/* Wpis „Narnia”, „wyrwany”: trzy zdjęcia w jednym rzędzie */
+.post-media.post-media--narnia-row,
+.post-media.post-media--powrot-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-items: start;
+}
+.post-media.post-media--narnia-row img,
+.post-media.post-media--powrot-row img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* Wpis „backstage” (relacja): małe miniatury, siatka 4×2 */
+.post-media.post-media--backstage-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.4rem;
+  max-width: min(100%, 26rem);
+  margin-inline: auto;
+}
+.post-media.post-media--backstage-thumbs img {
+  width: 100%;
+  aspect-ratio: 1;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  margin: 0;
+}
+@media (max-width: 32rem) {
+  .post-media.post-media--backstage-thumbs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: min(100%, 18rem);
+  }
+}
+
+/* Wpis „Brokat”: luźny kolaż — 2082 i 2215 w jednym rzędzie, dolne krawędzie wyrównane */
+.post-media.post-media--brokat-layout {
+  display: block;
+  position: relative;
+  padding: 0.35rem 0.15rem 1.75rem;
+  overflow: visible;
+}
+.post-media.post-media--brokat-layout .brokat-cluster {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+  min-width: 0;
+}
+.post-media.post-media--brokat-layout .brokat-photo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  vertical-align: middle;
+  box-shadow: 0 0.35rem 1.25rem rgba(0, 0, 0, 0.14);
+  border-radius: 2px;
+}
+.post-media.post-media--brokat-layout .brokat-cluster .brokat-photo--2082 {
+  max-width: min(58%, 22rem);
+  margin-left: -2%;
+  margin-right: 0;
+  margin-top: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.post-media.post-media--brokat-layout .brokat-cluster .brokat-photo--2215 {
+  max-width: min(46%, 15rem);
+  margin-left: 0;
+  margin-right: -1%;
+  margin-top: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+.post-media.post-media--brokat-layout .brokat-photo--1123 {
+  max-width: 60%;
+  margin-left: clamp(4%, 10vw, 14%);
+  margin-right: auto;
+  margin-top: clamp(1.1rem, 3.5vw, 2.25rem);
+  position: relative;
+  z-index: 0;
+}
+@media (max-width: 32rem) {
+  .post-media.post-media--brokat-layout {
+    padding-bottom: 0.75rem;
+  }
+  .post-media.post-media--brokat-layout .brokat-cluster {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .post-media.post-media--brokat-layout .brokat-cluster .brokat-photo--2082 {
+    max-width: 88%;
+    margin-left: 0;
+  }
+  .post-media.post-media--brokat-layout .brokat-cluster .brokat-photo--2215 {
+    max-width: 62%;
+    margin-top: 0.5rem;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .post-media.post-media--brokat-layout .brokat-photo--1123 {
+    max-width: 60%;
+    margin-left: 0;
+    margin-top: 1.35rem;
+  }
+}
+
+/* Wpis „Typologia szyi.”: tylko kolaż na stronie; zdjęcia źródłowe w galerii po kliknięciu (DOM ukryty) */
+.post-media.post-media--typologia {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.post-media.post-media--typologia .typologia-cover img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 0.4rem 1.35rem rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  vertical-align: middle;
+}
+.post-media.post-media--typologia .typologia-photos {
+  display: none;
+}
+
+/* Wpis „Smoła”, „sztuka” (rower_obraz), „przebicie”, folia+render (bez_tytulu_01): siatka 2 kolumny */
+.post-media.post-media--smola-row,
+.post-media.post-media--rower-obraz-row,
+.post-media.post-media--przebicie-row,
+.post-media.post-media--bez-tytulu-01-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-items: start;
+}
+.post-media.post-media--smola-row img,
+.post-media.post-media--rower-obraz-row img,
+.post-media.post-media--przebicie-row img,
+.post-media.post-media--bez-tytulu-01-row img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.post-media.post-media--expecto img {
+  width: 70%;
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: contain;
+}
+
+/* Wpis „Napięcie”: siatka 2×2 (182 | 191, 184 | 198) */
+.post-media.post-media--napiecie-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-items: start;
+}
+.post-media.post-media--napiecie-grid img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Wpis „inscenizacja”: u góry p1 + p2 (pion, crop), na dole trzy (crop, równe) */
+.post-media.post-media--inscenizacja {
+  gap: 0.65rem;
+}
+.post-media.post-media--inscenizacja .inscenizacja-top {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-items: stretch;
+}
+.post-media.post-media--inscenizacja .inscenizacja-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  align-items: stretch;
+}
+.post-media.post-media--inscenizacja .inscenizacja-cell {
+  overflow: hidden;
+  min-width: 0;
+  background: #e8e8e8;
+}
+.post-media.post-media--inscenizacja .inscenizacja-cell--portrait {
+  aspect-ratio: 3 / 4;
+}
+.post-media.post-media--inscenizacja .inscenizacja-cell--bottom {
+  aspect-ratio: 4 / 3;
+}
+.post-media.post-media--inscenizacja .inscenizacja-cell img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+/* p5: cover, dół kadru widoczny w miniaturze */
+.post-media.post-media--inscenizacja .inscenizacja-cell--p5 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+}
+
+.post-body p {
+  margin: 0 0 0.85em;
+  font-family: var(--font-text);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #333;
+}
+.post-body p:last-child { margin-bottom: 0; }
+
+/* Wpis „pierwszy-wpis”: wyśrodkowany akapit */
+.post[data-post="pierwszy-wpis"] .post-body {
+  text-align: center;
+}
+
+/* Blog lightbox: ten sam typ przeglądarki co w galerii (nawigacja + filmstrip) */
+.blog-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #fff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 40px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable;
+}
+.blog-lightbox[hidden] {
+  display: none !important;
+}
+.blog-lightbox__close {
+  position: absolute;
+  top: clamp(12px, 3vw, 28px);
+  right: calc(clamp(12px, 3vw, 28px) + env(safe-area-inset-right, 0px) + 14px);
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-family: inherit;
+}
+.blog-lightbox__close:hover {
+  color: #666;
+}
+.blog-lightbox__inner {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: clamp(24px, 4vw, 56px);
+  max-width: min(1200px, 100%);
+  height: min(94vh, 1100px);
+  width: 100%;
+  min-height: 0;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.blog-lightbox__stage {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  min-height: 0;
+}
+.blog-lightbox__stage-main {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+.blog-lightbox__figure {
+  margin: 0;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.blog-lightbox__figure img {
+  max-width: 100%;
+  max-height: min(78vh, 860px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  cursor: zoom-in;
+}
+.blog-lightbox__nav {
+  flex: 0 0 auto;
+  width: 2rem;
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px 4px;
+  font-family: inherit;
+  align-self: center;
+}
+.blog-lightbox__nav:hover:not(:disabled) {
+  color: #666;
+}
+.blog-lightbox__nav:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.blog-lightbox__filmstrip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 2px 4px;
+  margin: 0;
+  border-top: 1px solid var(--line);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+.blog-lightbox__filmstrip[hidden] {
+  display: none !important;
+}
+.blog-lightbox__filmstrip-item {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 30px;
+  height: 56px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  overflow: visible;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.blog-lightbox__filmstrip-item.is-active,
+.blog-lightbox__filmstrip-item:focus-visible {
+  border-color: #1a1a1a;
+}
+.blog-lightbox__filmstrip-item img {
+  width: auto;
+  height: 100%;
+  max-width: 110px;
+  object-fit: contain;
+  display: block;
+}
+.blog-lightbox.is-image-fullscreen {
+  padding: clamp(8px, 1.6vw, 14px);
+  overflow: hidden;
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__inner {
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__stage {
+  flex: 1 1 100%;
+  min-height: 0;
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__stage-main {
+  min-height: 100%;
+  padding-block: clamp(14px, 3vh, 28px);
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__figure {
+  padding: clamp(10px, 2vw, 18px);
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__figure img {
+  max-width: 100%;
+  max-height: calc(100dvh - clamp(70px, 14vh, 132px));
+  cursor: zoom-out;
+}
+.blog-lightbox.is-image-fullscreen .blog-lightbox__filmstrip {
+  display: none !important;
+}

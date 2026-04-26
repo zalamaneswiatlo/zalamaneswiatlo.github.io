@@ -1,0 +1,12 @@
+#!/bin/sh
+# Blokuje wypchnięcie brancha local_with_history (wyłącznie lokalny).
+# Włączenie: git config core.hooksPath .githooks
+while read -r local_ref _local_sha _remote_ref _remote_sha; do
+  case "$local_ref" in
+  refs/heads/local_with_history)
+    printf '%s\n' "Odmowa: branch local_with_history nie jest pushowany na zdalne." >&2
+    exit 1
+    ;;
+  esac
+done
+exit 0
